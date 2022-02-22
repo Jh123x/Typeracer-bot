@@ -15,7 +15,7 @@ def screenshot() -> Image:
 
 def enter_text(words: str):
     """Enter the string"""
-    pyautogui.typewrite(words, interval=0.05)
+    pyautogui.typewrite(words, interval=0.01)
 
 
 def alt_tab():
@@ -28,21 +28,23 @@ def crop_image(image: Image) -> Image:
     return image.crop((1950, 1250, 3750, 1700))
 
 def ocr(image: Image) -> str:
-    return pytesseract.image_to_string(image.convert("1"), lang=tesseract_language, config=tesseract_config)
+    return pytesseract.image_to_string(image, lang=tesseract_language, config=tesseract_config)
+
+def greyscale(image: Image) -> Image:
+    return image.convert("1")
 
 
 def main():
     img = screenshot()
     img = crop_image(img)
+    img = greyscale(img)
 
     typed_string = ocr(img)
-    # print(typed_string)
     temp = typed_string.split("\n\n")
     typed_str = " ".join(temp[0].split("\n"))
-    print(typed_str)
+    print(f"Detected string: {typed_str}")
     alt_tab()
     enter_text(typed_str)
-    img.show()
 
 
 if __name__ == '__main__':
