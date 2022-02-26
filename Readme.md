@@ -14,3 +14,4 @@ Make sure to run it after the timer has started
 ## Tech stack
 1. [pytesseract](https://pypi.org/project/pytesseract/) for OCR
 2. [pyautogui](https://pyautogui.readthedocs.io/en/latest/) for keyboard automation
+3. [pillow](https://pillow.readthedocs.io/en/stable/) for image manipulation
