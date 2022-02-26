@@ -25,7 +25,7 @@ def alt_tab():
 
 def crop_image(image: Image) -> Image:
     """Resize the image"""
-    return image.crop((1950, 1250, 3750, 1700))
+    return image.crop((1950, 1250, 3750, 1700)) ## Coordinate of image (Change based on monitor used)
 
 def ocr(image: Image) -> str:
     return pytesseract.image_to_string(image, lang=tesseract_language, config=tesseract_config)
@@ -43,8 +43,13 @@ def main():
     temp = typed_string.split("\n\n")
     typed_str = " ".join(temp[0].split("\n"))
     print(f"Detected string: {typed_str}")
+
+    ## Comment these 2 when testing ##
     alt_tab()
     enter_text(typed_str)
+    ##                              ##
+    
+    img.show()
 
 
 if __name__ == '__main__':
