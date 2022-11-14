@@ -13,15 +13,17 @@ def screenshot() -> Image:
     return image
 
 
-def enter_text(words: str):
+def enter_text(words: str, wpm: int):
     """Enter the string"""
-    pyautogui.typewrite(words, interval=0.01)
+    word_count = len(words.split(' '))
+    letter_count = len(words)
+    interval = ((word_count / wpm) / letter_count) * 60
+    pyautogui.typewrite(words, interval=interval)
 
 
 def alt_tab():
     """Alt + Tab"""
     pyautogui.hotkey('alt', 'tab')
-
 
 def crop_image(image: Image) -> Image:
     """Resize the image"""
@@ -44,9 +46,10 @@ def main():
     typed_str = " ".join(temp[0].split("\n"))
     print(f"Detected string: {typed_str}")
 
+    wpm = int(input("WPM wanted: "))
     ## Comment these 2 when testing ##
     alt_tab()
-    enter_text(typed_str)
+    enter_text(typed_str, wpm)
     ##                              ##
     
     img.show()
